@@ -1,3 +1,8 @@
+---
+name: build-chat-ui
+description: Cria uma interface de chat em SwiftUI para conversar com um LLM, com streaming de respostas e renderização de markdown. Use quando o usuário pedir uma tela de chat, interface conversacional ou UI para um assistente/LLM em SwiftUI.
+---
+
 ## Crie uma interface de chat em SwiftUI
 
 Use esta skill para criar uma interface de chat com um LLM, com streaming de respostas e renderização em markdown.
