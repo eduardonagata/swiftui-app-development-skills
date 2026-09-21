@@ -154,7 +154,9 @@ A geração ocorre utilizando o framework Foundation Models. Primeiro adiciona-s
 
 enviar() é bloqueado com guard caso uma geração esteja em andamento e desbloqueado no final com `defer { respondendo = false }`, que roda quando a Task termina, seja por conclusão, erro ou cancelamento via parar(). `respondendo = true` é feito ainda em enviar(), antes de criar a Task, e não dentro dela: a Task só começa a executar depois que enviar() retorna, e nesse intervalo um segundo envio passaria pelo guard.
 
-Quando o usuário chama parar(), o stream lança `CancellationError`. Esse caso é capturado separadamente para não ser exibido como erro; o texto já gerado permanece na mensagem do assistente. 
+Quando o usuário chama parar(), o stream lança `CancellationError`. Esse caso é capturado separadamente para não ser exibido como erro; o texto já gerado permanece na mensagem do assistente.
+
+Nessa parte, quando o usuário optar por usar um modelo de um provedor remoto, coloque uma instrução no README.md do projeto para que ele crie uma variável de ambiente `ANTHROPIC_API_KEY` com a chave de API do provedor. O código acima lê essa variável e passa para o construtor do modelo. Coloque instruções de como criar essa variável de ambiente no README.md, para que o usuário saiba como configurar a chave de API no Xcode. Por exemplo, no Xcode 15, vá em Product > Scheme > Edit Scheme, selecione Run > Arguments e adicione a variável de ambiente `ANTHROPIC_API_KEY` com o valor da chave de API.
 
 ### 1.3. Bolhas de mensagem com markdown renderizado
 
@@ -304,6 +306,8 @@ struct Mensagem: Identifiable {
 ### 2. Considerações finais
 
 Neste documento eu descrevo o meu entendimento sobre esse modelo. Interfaces de chat construídas seguindo essa estrutura têm uma propriedade muito boa: o entendimento sobre seu mecanismo fundamental de funcionamento é totalmente compreensível pelo autor dessa skill. Portanto, essa skill, mais do que possibilitar replicar uma estrutura de desenvolvimento, documenta o meu conhecimento sobre construção de interfaces de chat em SwiftUI, e isso é um conhecimento vivo que o agente pode utilizar para dar forma a um app real.
+
+Ao término, descreva de maneira sucinta a estrutura no CLAUDE.md. Esse conhecimento pode ser utilizado para, por exemplo, permitir adicionar uma nova forma de renderizar um bloco de markdown para um tipo de componente de presentationIntent diferente, ou permitir que o usuário configure a cor das bolhas de mensagem, ou ainda permitir que o usuário configure a fonte utilizada na renderização do markdown. Tudo usando a mesma estrutura fundamental.
 
 ### 3. Nota de melhoria: religar a rolagem automática ao voltar para o fim
 
